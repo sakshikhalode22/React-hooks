@@ -1,0 +1,510 @@
+1. What are the advantages of functional component over class component? OR 
+Which of the following  are the problems that you would most likely encounter while using React Class Components?
+Ans:    1. Huge Components due to the distributed logic in lifecycle methods
+        2. Wrapper Hell  caused by re-using components
+
+2. React Hooks should be called at 
+Ans:    1. The top level of the functions.
+        2. Within React functions or functional components or custom hooks.
+        (Users should not call hooks in loops, conditions, and nested functions)
+
+3. Which of the following helps in extracting and sharing non-visual logic across React Components?
+Ans:    Custom hooks
+
+4. States key point
+Ans:    1. States are mutable 
+        2. They are reserved for interactivity. The component's event handlers may update the state and trigger a 
+            UI update
+        3. The state will be set with a default value when component mounts and will mutate in time based on user 
+            events generated
+
+5. Phases of lifecycle
+Ans:    1. Mounting phase - when the component is mounted to DOM tree
+        2. Updating phase - when component is being updated with new state, new  props are being received
+        3. Unmounting phase - destroying component from DOM tree ​​​​​​​
+        
+6. Variations of useEffect hook
+Ans:    1. No dependency - useEffect executes once after component mounts and every time the component gets updated.
+        2. An Empty array - useEffect executes only once after component mounts
+        3. Props or State  - useEffect executes only once after component mounts and then every time the dependency 
+           value changes
+
+7. Unmounting phase
+Ans:    Component can be unmounted using unmountComponentAtNode method
+        ReactDOM.unmountComponentAtNode( document.getElementById('root') );
+        Before unmounting the component clean up can be done by returning a function from useEffect hook
+
+8. Consider the below code snippet:
+
+        function Sample() {
+        const [name,setName] = useState("Jack")
+        const [age,setAge] = useState(20)
+        useEffect(()=>{
+        console.log("use Effect called")
+        },[age])
+        return (
+        <div>
+        <h1>Your Name is: {name}</h1><br/>
+        <h1>Your Age is: {age} </h1><br/>
+        <button onClick={()=>setName("Tom")}>Change Name</button>
+        <button onClick={()=>setAge(age+1)}>Change Age</button>
+        </div>
+        );
+        }
+        How many times the "use Effect called" will be logged to the console when the change Name button and Change Age button is clicked 3 times each?
+Ans:    4
+
+9: Jack has created a React application that contains the CourseList component with state courses as shown below.
+
+        const CourseList = () => {
+                
+                const [courses,setCourses] = useState([
+                
+                ])
+                const [success, setSuccess] = useState('')
+        }
+        He wants to retrieve the list of courses available for registration from the database within the CourseList component. He wants the courses data to be rendered immediately when the component is rendered. Which of the following code snippet helps Jack to achieve the above requirement?
+Ans:    useEffect(() => { // asynchronous call },[]);
+
+10: Consider Sample component as shown below:​​​​​​​
+
+        const Sample = () => {      
+
+        const [age, setAge] = useState(0)
+
+        useEffect(()=>{
+
+        console.log("use Effect called")
+
+        })
+
+        return (
+
+        <>
+
+        <h1>{age}</h1>
+
+        <button onClick={()=>setAge(age+1)}>Change Age</button>
+
+        </>
+
+        )
+
+        }
+
+        export default Sample;
+        ​​​​​​​How many times “use Effect called” will be logged to the console when the value of age is 7
+Ans: 8
+
+11. Why context API?
+Ans:    Consider a scenario where a React application has the below component tree:
+        Assume that, ‘App’ component contains theme data (light theme or dark theme) which needs to be shared with CourseList, CourseDetails, AddCourse, and StatusBar components.  
+        In this case, we can pass down the theme data as props to ‘Home’ and ‘NavBar’ components. ‘Home’ component can in turn pass it down to ‘CourseDetails’ and ‘AddCourse’ components. Similarly ‘NavBar’ component can pass down the data to ‘StatusBar’ component.
+        The problem with the above approach is that the ‘CourseList’ and ‘NavBar’ components unnecessarily get data that they do not need. 
+        As the component tree becomes complex it becomes difficult to pass down the props to all the components in the tree. This process of passing props from higher level component to lower level components are known as props drilling.
+        Here, the Context API helps in solving the above problem. It helps in passing data through the component tree without having to pass the props down to every component manually.
+        Context API is used to share state within a component tree easily.  
+
+12. What is Context API?
+Ans:    Context API helps in passing data through the component tree without the problem of passing props down to every component in the hierarchy.
+        Context helps in making the data available to all components throughout the component hierarchy, no matter how deeply nested the components are.
+        While using context API first we would create a context object. 
+        In order to make the context available to all the components, Provider is created.
+        Provider is a React component that allows the components to consume the context by subscribing to the context changes.
+        The components can consume the context using Consumer or using the static property ‘contextType’
+
+13: Which of the following is true w.r.t to context API?
+Ans:    context API is used to share data between the components
+
+14: Which of the following hooks helps in consuming context within functional components?
+Ans:    useContext
+
+15: Which among the below is false w.r.t context API?
+    A.Context can be created only by using createContext()
+    B.It is necessary to wrap the component within Context.Provider to access the context property
+    C.It is necessary to wrap the component within Context.Consumer to access the context property
+Ans:    Only c
+
+ 
+
+16. Which of the following are the new hooks introduced in React 18 to implement Concurrency?
+Ans:    1.UseTransition() 
+        2.UseDeferredValue() 
+
+17. True about Concurrency? 
+Ans:    1.Concurrency allows React applications to keep multiple instances of UI simultaneously. 
+        2.This means that the applications can continue to show old UI or old values. While at the background, components calculate new values and load new data once it is ready.
+
+18. While using the hooks useTransition or useDeferredValue, users are also kept informed about what is fresh, what is being updated, and what is stale.
+Ans:    True
+
+
+19. What is the useState Hook in React, and how is it used?
+Ans: The useState Hook in React is a built-in Hook that allows functional components to have state. It is used to declare state variables and returns an array of two values: the current state value and a function to update the state. The syntax for using useState is const [state, setState] = useState(initialState); where initialState is the initial value of the state variable, and setState is the function used to update the state.
+
+20. How can you update state using the useState Hook in React?
+Ans. You can update state using the setState function returned by useState. The setState function can take a new value to update the state, or a function that returns the new state. For example, to update a state variable named count, you can use setCount(newCount) to set it to a new value.
+
+21. What is the difference between using an object and individual state variables with the useState Hook in React?
+Ans: When using an object with useState, you can update multiple state variables at once by merging the new values with the previous state object. However, when using individual state variables, you need to update each variable separately. For example, using an object for a form with input fields, you can update all fields at once with setFormData({ ...formData, [name]: value }) where name is the input field name and value is the input value. But when using individual state variables, you need to update each field separately with setField1(value1) and setField2(value2), etc.
+
+22. How can you initialize state conditionally using the useState Hook in React?
+Ans: You can initialize state conditionally by passing a function as the argument to useState instead of a value. The function should return the initial state value based on some condition. For example, you can initialize a state variable named count to 0 if the user is logged in, or null if the user is not logged in, by using const [count, setCount] = useState(() => isLoggedIn ? 0 : null).
+
+23. How can you use the useState Hook to manage arrays in React?
+Ans: You can use the useState Hook to manage arrays by declaring an array as the initial state value and updating it using the setState function. For example, to add an item to an array state variable named items, you can use setItems([...items, newItem]), where newItem is the item to be added. Similarly, to remove an item, you can use setItems(items.filter(item => item.id !== itemId)), where itemId is the ID of the item to be removed.
+
+24. How can you use the useState Hook to manage boolean values in React?
+Ans: You can use the useState Hook to manage boolean values by declaring a boolean as the initial state value and updating it using the setState function. For example, to toggle a boolean state variable named isOn, you can use setIsOn(prevIsOn => !prevIsOn).
+
+25. How can you use the useState Hook to manage previous state values in React?
+Ans: You can use the useState Hook to manage previous state values by passing a function as the argument to the setState function. The function receives the previous state value as its argument and returns the new state value. For example, to update a state variable named count based on its previous value, you can use setCount(prevCount => prevCount + 1) to increment it by 1. This ensures that the new state value is based on the previous state value and not the initial state value.
+
+26. What is the performance impact of using the useState Hook in React?
+Ans: The performance impact of using the useState Hook in React is minimal, as React is optimized to handle frequent state updates efficiently. However, using multiple state variables or complex state objects can have a performance impact, as each update triggers a re-render of the component. To optimize performance, you can use the useMemo Hook to memoize expensive computations based on state, or the useCallback Hook to memoize event handler functions.
+
+27.How can you test components that use the useState Hook in React?
+Ans: You can test components that use the useState Hook in React by rendering them in a test environment and asserting the expected state values after certain actions or events. You can also mock the useState Hook to control its behavior and test edge cases or error handling. For example, you can use the jest.spyOn function to spy on the useState Hook and return a specific value or trigger an error. Additionally, you can use testing libraries like react-testing-library or enzyme to test the component's behavior and interactions with other components.
+
+28. How can you use the useState Hook to manage controlled inputs in React, such as with forms?
+Ans: You can use the useState Hook to manage controlled inputs in React by declaring a state variable for each input field and updating them based on the user's input. For example, to manage a form with two input fields named username and password, you can use const [username, setUsername] = useState(''); and const [password, setPassword] = useState(''); and update them using the onChange event of the input elements. Additionally, you can use the value and onChange props to bind the input values to the state variables, like 
+{username}
+ {setUsername(e.target.value)} />. This ensures that the input values are always synced with the state values and can be accessed and submitted as a whole.
+
+29. What is the purpose of useEffect?
+Ans: useEffect is a hook in React that allows you to run side effects in functional components. It replaces the componentDidMount, componentDidUpdate, and componentWillUnmount lifecycle methods in class components.
+
+30. When is useEffect executed?
+Ans: useEffect is executed after every render cycle of the component by default. You can also specify dependencies to control when the effect should be executed
+
+31. What are the dependencies in useEffect?
+Ans: Dependencies are an optional array parameter in useEffect that allows you to specify when the effect should be executed. If any of the dependencies change between render cycles, the effect will be executed again. If there are no dependencies specified, the effect will be executed after every render cycle.
+
+32. How do you cleanup after an effect in useEffect?
+Ans: You can return a function from useEffect that will be executed when the component is unmounted or when the dependencies change. This function can be used to cleanup any resources created by the effect.
+
+33. What is the purpose of useRef?
+Ans: useRef is a hook in React that allows you to create a mutable reference to an element or a value. This reference persists between render cycles and can be used to store state without triggering a re-render.
+
+34. How do you access the value of a useRef?
+Ans: You can access the value of a useRef by using the .current property. For example, if you create a useRef with const ref = useRef(null), you can access the current value with ref.current.
+
+35. What is the difference between useState and useRef?
+useState is used to manage state that triggers a re-render when it changes, while useRef is used to store mutable values that don't trigger a re-render. UseRef can be used to store previous values, set initial values, store callbacks or to store references to DOM elements.
+
+36. How do you create a ref to a DOM element with useRef?
+Ans: You can create a ref to a DOM element with useRef by using the ref attribute in the JSX. For example, <input ref="{myRef}"> will create a ref to the input element that can be accessed with myRef.current.
+
+37. What is the difference between useEffect and useLayoutEffect?
+Ans: useEffect and useLayoutEffect are similar, but useLayoutEffect runs synchronously after all DOM mutations but before the browser has a chance to paint the changes on the screen. This can be useful if you need to measure the size or position of an element before rendering it.
+
+38. Can you use multiple useEffect hooks in a single component?
+Ans: Yes, you can use multiple useEffect hooks in a single component. Each hook can have its own dependencies and cleanup function.
+
+39. What is the purpose of the second argument in useEffect?
+Ans: The second argument in useEffect is an array of dependencies that determines when the effect should be executed. If the dependencies have not changed since the last render, the effect will not be executed. This can be useful for performance optimization.
+
+40. How do you prevent an effect from running on the first render cycle?
+Ans: You can use a flag or a ref to prevent an effect from running on the first render cycle. For example, you can set a ref to true in the first render cycle and check it in the effect to skip the first execution.
+
+41. Can useRef be used to store state that triggers a re-render?
+Ans: Yes, useRef can be used to store state that triggers a re-render, but it's not recommended because it can lead to bugs and unexpected behavior. Use useState or useReducer for managing state that triggers a re-render.
+
+42. How do you create a ref to a functional component with useRef?
+Ans: You can create a ref to a functional component with useRef by using the React.forwardRef function to forward the ref to the underlying component. For example, const MyComponent = React.forwardRef((props, ref) => ...) will create a ref that can be accessed with myRef.current.
+
+43. What is the difference between useRef and createRef?
+Ans: useRef is a hook that creates a mutable reference that persists between render cycles, while createRef is a method that creates a ref that is not mutable and is only available on the component instance. Use useRef for managing state and createRef for accessing DOM elements.
+
+44.Can useEffect be used to perform server-side rendering?
+Ans: No, useEffect can't be used to perform server-side rendering because it relies on the browser's DOM API which is not available on the server. Use a server-side rendering framework like Next.js instead
+///////////////////////////////////////////
+Q1 of 15
+useEffect() is similar to which of the following Lifecycle method of class component?
+
+
+componentDidMount();
+
+componentDidUpdate();
+
+None of them
+
+Both of them
+Q2 of 15
+Observe the below code and choose the option appropriately.
+
+
+import React, { useState } from "react";
+function Counter() {
+state = {
+   count: 0,
+ };
+
+ incrementCount = () => {
+   this.setState({
+     count: this.state.count + 1,
+   });
+ };
+ return (<div>
+     <button onClick={this.incrementCount}>Count: {this.state.count}</button>
+   </div>
+ );
+}
+
+
+Will run successfully.
+
+Will throw warning in console with display in browser.
+
+Will throw error in browser window.
+
+Answer not mentioned.
+Q3 of 15
+What should be written in “Line 1” , so that counter increases on button click?
+
+function CounterHook() {
+ 
+ const [count, setCount] = useState(0);
+ return (
+   <div>
+     <p>You clicked {count} times</p>
+     <button onClick={ // LINE 1 // }>
+       Click me
+     </button>
+   </div>
+ );
+}
+
+
+() => this.setCount( count + 1);
+
+() => this.setCount = count + 1;
+
+() => setCount = count+1;
+
+() => setCount(count + 1);
+Q4 of 15
+Observe the following code and choose the option appropriately?
+
+const reducer = (state, action) => {
+   switch (action.type) {
+       case "EMP1":
+           return { ...state, name: “MOHAN” };
+
+       case "EMP2":
+           return { ...state, name: “JOHN” };
+
+       default:
+           return state;
+   }
+}
+
+const App = () => {
+   const [{ name }, dispatch] = useReducer(reducer, { name: “MARK” });
+
+   return <>
+       <h1>{`Counter value: ${ name }`}</h1>
+       <button onClick={() => dispatch({ type: "EMP1" })}>BUTTON 1</button>
+       <button onClick={() => dispatch({ type: "EMP2" })}>BUTTON 2</button>
+   </>
+}
+ 
+
+
+Click on BUTTON 1 will change name from MARK to JOHN
+
+Click on BUTTON 2 will change name from MARK to MOHAN
+
+Click on BUTTON 1 or BUTTON 2 will not crate any change in name
+
+Click on BUTTON 1 will change name from MARK to MOHAN
+Q5 of 15
+Choose the option appropriately after analysing the code snippet(Consider all export imports already done).
+
+function Sample() {
+  const [age, setAge] = useState(20)
+  useEffect( ()=>{
+    console.log("use Effect called")
+  },[age])
+  return (
+    <div>
+      <h1>Your Age is: {age} </h1><br/>
+      <button onClick={()=>setAge(age+1)}>Change Age</button>
+    </div>
+  );
+}
+
+Use effect is never called
+
+Use effect called only once
+
+Use effect called every time state of Age updates
+
+None of the above
+Q6 of 15
+useTransition hook allows us to __?
+
+
+update the state
+
+change the state to previous state
+
+mark state update as urgent
+
+mark state update as non-urgent
+Q7 of 15
+Hooks can be used with?
+
+
+Class component
+
+Functional component
+
+Both, class and functional component
+
+None
+Q8 of 15
+Which of the following are false w.r.t to useRef hook?
+
+
+ref can be assigned to the JSX element within a component but not for child components
+
+ref can be assigned only to the input elements
+
+The code for updating the current property of ref need to be placed within the useEffect hook
+
+. React.forwardref method is used within the child component to get the ref passed from parent component
+Q9 of 15
+Considerthe following code snippet and choose the options correctly.
+ (Assume all requirements of code fullfilled)
+
+ 
+
+const Employees = () => {
+       const [employees, setEmployees] = useState([
+               { empId: 1234, name: 'John', designation: 'SE' }
+              ])
+       const addEmployee = () => {
+               setEmployees([ {empId: 1122, name: 'Jack', designation: 'SSE'} ]);
+       };
+}
+
+
+addEmployee() adds the new employee "Jack" & total no. of employee = 2.
+
+addEmployee() replace the existing employee with new one & total no. of employee = 1.
+
+addEmployee() throws error on window.
+
+None of the above.
+Q10 of 15
+useMemo hooks is used to ?
+
+
+to update the state
+
+to store the application data
+
+to optimize functional calls during the re-rendering of a component
+
+to share data across the app
+Q11 of 15
+Choose the correct Syntax, used to import useState and useEffect ?
+
+
+import useState, useEffect = “React”;
+
+import { useState, useEffect } = “ React”;
+
+import React, { useState, useEffect } from “ React”;
+
+import React, { useState, useEffect } = “ React”;
+Q12 of 15
+Which functions are not part of react hooks?
+
+
+useEffect()
+
+useState()
+
+componentDidMount()
+
+All are used in HOOKs
+Q13 of 15
+Consider the Counter component below:
+
+const Counter = () => {
+   const [count, setCount] = useState(0);
+
+   useEffect(() => {
+       console.log("useEffect called ");
+   })
+
+   useLayoutEffect(() => {
+       console.log("useLayoutEffect called");
+   })
+
+   const increment = () => setCount(count + 1);
+
+   return <>
+       <h6>{`Counter: ${count}`}</h6>
+       <button onClick={increment}>Increment</button>
+   </>
+}
+ 
+
+
+Line 1: useEffect called Line 2 :Counter : 0
+
+Line 1: useLayoutEffect called Line 2 :Counter : 0
+
+Line 1: useEffect called Line 2 : useLayoutEffect called
+
+Line 1: useLayoutEffect called Line 2 : useEffect called
+Q14 of 15
+which of the following is false wrt context API?
+
+
+context API is used to fetch data from API.
+
+context API allows us to share state between the components.
+
+useContext hook allows us to consume a context API.
+
+context API can only be used with functional components.
+Q15 of 15
+Choose from the options appropriately after analysing the given code. ( Assume initialCount = 0 )
+
+ 
+
+1. Reset button sets the "count" to zero. 
+   2. '-' button takes initial count value and decreases it by 1 on every click of this button.
+   3. '+' button takes the previous count value and increases it by 1 on every click of this button.
+
+function Counter( {initialCount} ) {
+ const [count, setCount] = useState(initialCount);
+const decCount = () => {
+setCount(prevCount => prevCount - 1)
+}
+const incCount = () => {
+ setCount(count + 1);
+}
+ return (
+   <>
+     Count: {count}
+     <button onClick={ () => setCount(initialCount) }> Reset </button>
+     <button onClick={ decCount }> - </button>
+     <button onClick={ incCount }> + </button>
+   </>
+ );
+}
+
+
+1 & 2 only are correct.
+
+Only option 1 is correct.
+
+1 & 3 are correct.
+
+All are correct.
+///////////////////////////////////////////////////////////////
